@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_brace_in_string_interps
 
 import 'package:coinbase_clone/controllers/prices_controller.dart';
 import 'package:flutter/material.dart';
@@ -42,10 +42,22 @@ class _PricesViewState extends State<PricesView> {
                     separatorBuilder: (BuildContext context, int index) =>
                         const Divider(),
                     itemBuilder: (context, index) {
+                      var price = double.parse(snapshot.data![index].priceUsd!)
+                          .toStringAsFixed(2);
+                      var change =
+                          double.parse(snapshot.data![index].changePercent24Hr!)
+                              .toStringAsFixed(2);
                       return ListTile(
                         title: Text(snapshot.data![index].name!),
                         subtitle: Text(snapshot.data![index].symbol!),
-                        // trailing: Icon(Icons.person),
+                        trailing: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text('USD ${price}'),
+                            Text('${change} %'),
+                          ],
+                        ),
                         leading: Image.network(
                             'https://cryptoicons.org/api/icon/${snapshot.data![index].symbol!.toLowerCase()}/30'),
                         // leading: Text(snapshot.data![index].id.toString()),
@@ -53,8 +65,6 @@ class _PricesViewState extends State<PricesView> {
                     });
               } else if (snapshot.hasError) {
                 return Text(snapshot.error.toString());
-                // return Text(
-                //     'Erro ao Carregar! Contacte: suporte@techmaster.co.mz');
               }
 
               return Center(
