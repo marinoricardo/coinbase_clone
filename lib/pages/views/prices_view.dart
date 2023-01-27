@@ -58,8 +58,9 @@ class _PricesViewState extends State<PricesView> {
                             Text('${change} %'),
                           ],
                         ),
-                        leading: Image.network(
-                            'https://cryptoicons.org/api/icon/${snapshot.data![index].symbol!.toLowerCase()}/30'),
+                        leading: CircleAvatar(
+                            child: Image.network(
+                                'https://cryptoicons.org/api/icon/${snapshot.data![index].symbol!.toLowerCase()}/30')),
                         // leading: Text(snapshot.data![index].id.toString()),
                       );
                     });
