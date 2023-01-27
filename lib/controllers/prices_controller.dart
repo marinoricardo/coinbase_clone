@@ -11,9 +11,9 @@ class PricesController {
     if (response.statusCode == 200) {
       // print(response);
       var dados = jsonDecode(response.body);
-      var listConcursoAux = dados['data'] as List;
+      var prices = dados['data'] as List;
       // List listaUsuario = jsonDecode(response.body);
-      return listConcursoAux.map((e) => Price.fromJson(e)).toList();
+      return prices.map((e) => Price.fromJson(e)).toList();
     } else {
       throw Exception('Error ao carregar');
     }
